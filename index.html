@@ -546,8 +546,7 @@
             }
 
             #disclaimer {
-                flex-shrink: 0;
-                padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
+                padding: 20px 20px calc(10px + env(safe-area-inset-bottom, 0px));
                 text-align: center;
                 font-size: 10px;
                 color: #999;
@@ -658,30 +657,29 @@
                 role="list"
                 aria-label="Communication phrases"
             ></div>
-        </div>
-
-        <div id="disclaimer">
-            <span id="disclaimer-text"
-                >This is not a medical device. This software is not approved,
-                cleared, or certified by any medical regulatory authority. It is
-                provided as-is for personal, educational, and experimental use
-                only. This application should not be relied upon in emergency or
-                life-threatening situations. Users should consult with qualified
-                healthcare professionals and certified speech-language
-                pathologists for proper AAC assessment and device
-                recommendations. Use at your own risk. The developer assumes no
-                liability for any consequences of using this software. Developed
-                by
-                <a href="https://www.turiscandurra.com/" rel="author"
-                    >Turi Scandurra</a
-                >.
-                <a href="https://github.com/TuriSc/voxease/"
-                    >Source code</a
-                ></span
-            >
-            <button id="dismiss-disclaimer" aria-label="Dismiss disclaimer">
-                &times;
-            </button>
+            <div id="disclaimer">
+                <span id="disclaimer-text"
+                    >This is not a medical device. This software is not
+                    approved, cleared, or certified by any medical regulatory
+                    authority. It is provided as-is for personal, educational,
+                    and experimental use only. This application should not be
+                    relied upon in emergency or life-threatening situations.
+                    Users should consult with qualified healthcare professionals
+                    and certified speech-language pathologists for proper AAC
+                    assessment and device recommendations. Use at your own risk.
+                    The developer assumes no liability for any consequences of
+                    using this software. Developed by
+                    <a href="https://www.turiscandurra.com/" rel="author"
+                        >Turi Scandurra</a
+                    >.
+                    <a href="https://github.com/TuriSc/voxease/"
+                        >Source code</a
+                    ></span
+                >
+                <button id="dismiss-disclaimer" aria-label="Dismiss disclaimer">
+                    &times;
+                </button>
+            </div>
         </div>
 
         <div
@@ -1029,6 +1027,7 @@
             const MAX_TEXT_LENGTH = 500;
             const STORAGE_SETTINGS_KEY = "VoxEaseSettings";
             const STORAGE_PHRASES_KEY = "VoxEaseCustomPhrases";
+            const STORAGE_DISCLAIMER_KEY = "VoxEaseDisclaimerDismissed";
 
             // Language definitions
             const languages = {
@@ -3172,6 +3171,12 @@
                         document
                             .getElementById("disclaimer")
                             .classList.add("hidden");
+                        try {
+                            localStorage.setItem(
+                                STORAGE_DISCLAIMER_KEY,
+                                "true",
+                            );
+                        } catch (e) {}
                     });
                 document
                     .getElementById("settings-btn")
@@ -3347,6 +3352,11 @@
             function init() {
                 loadSettings();
                 loadCustomPhrases();
+                if (localStorage.getItem(STORAGE_DISCLAIMER_KEY)) {
+                    document
+                        .getElementById("disclaimer")
+                        .classList.add("hidden");
+                }
                 updatePrompt();
                 updatePhrases();
                 renderPhrases();
