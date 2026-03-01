@@ -1607,6 +1607,9 @@
             };
 
             // State management
+            const language =
+                navigator.languages.find((key) => languages[key]) ?? "en";
+            const keyboardLayout = language == "uk" ? "jcuken" : "qwerty";
             const state = {
                 phrases: [],
                 customPhrases: [],
@@ -1625,7 +1628,7 @@
                 gamepadLoopRunning: false,
                 cachedPhraseElements: [],
                 settings: {
-                    language: "en",
+                    language,
                     darkMode: false,
                     listView: false,
                     hoverSelect: false,
@@ -1638,7 +1641,7 @@
                     rightStickEnabled: true,
                     invertVertical: false,
                     invertHorizontal: false,
-                    keyboardLayout: "qwerty",
+                    keyboardLayout,
                     autoSpeak: true,
                     speechRate: 1,
                     enableSounds: true,
@@ -1821,6 +1824,12 @@
                     console.error("Failed to load custom phrases:", e);
                     showError("Failed to load custom phrases.");
                 }
+            }
+
+            function updatePrompt() {
+                const lang = languages[state.settings.language];
+                document.getElementById("output-banner").textContent =
+                    lang.selectPhrase;
             }
 
             function updatePhrases() {
@@ -2863,9 +2872,7 @@
                 saveSettings();
 
                 if (key === "language") {
-                    const lang = languages[state.settings.language];
-                    document.getElementById("output-banner").textContent =
-                        lang.selectPhrase;
+                    updatePrompt();
                     updatePhrases();
                     renderPhrases();
                 }
@@ -3032,6 +3039,7 @@
                             saveCustomPhrases();
                         }
 
+                        updatePrompt();
                         updatePhrases();
                         renderPhrases();
                         applySettings();
@@ -3269,6 +3277,7 @@
             function init() {
                 loadSettings();
                 loadCustomPhrases();
+                updatePrompt();
                 updatePhrases();
                 renderPhrases();
                 setupEventListeners();
