@@ -19,6 +19,7 @@ A self-contained, offline-capable web application for augmentative and alternati
   - Ukrainian (Українська)
   - Dutch (Nederlands)
   - Basque (Euskara)
+  - Greek (Ελληνικά)
 
 ### Input Methods
 
@@ -100,8 +101,8 @@ USE AT YOUR OWN RISK. The developer assumes no liability for any consequences of
 
 ## Version history
 
-- 2026.03.01 - v1.0.1
-  - Add Ukrainian, Dutch, Basque languages (thanks @nykula, @JayVisschedijk, @xezpeleta)
+- 2026.03.01 - v1.0.3
+  - Add Ukrainian, Dutch, Basque languages (thanks @nykula, @JayVisschedijk, @xezpeleta), Greek
   - Select browser language and matching keyboard layout automatically
   - Speak output banner text on click
   - Scroll view in scanning mode
