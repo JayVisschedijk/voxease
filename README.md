@@ -104,6 +104,8 @@ USE AT YOUR OWN RISK. The developer assumes no liability for any consequences of
   - Add Ukrainian, Dutch, Basque languages
   - Select browser language and matching keyboard layout automatically
   - Speak output banner text on click
+  - Scroll view in scanning mode
+  - Sort phrases by urgency
 - 2026.02.24 - v1.0.0 - First release
 
 ## More Information
